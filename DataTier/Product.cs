@@ -17,23 +17,47 @@ namespace DataTier
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
-            this.Order_Details = new HashSet<Order_Detail>();
+            this.Comments = new HashSet<Comment>();
+            this.DetailProducts = new HashSet<DetailProduct>();
+            this.ImagesProducts = new HashSet<ImagesProduct>();
+            this.SimilarProducts = new HashSet<SimilarProduct>();
+            this.SizeForProducts = new HashSet<SizeForProduct>();
+            this.Qualifications = new HashSet<Qualification>();
         }
     
-        public int ProductID { get; set; }
-        public string ProductName { get; set; }
-        public Nullable<int> SupplierID { get; set; }
-        public Nullable<int> CategoryID { get; set; }
-        public string QuantityPerUnit { get; set; }
-        public Nullable<decimal> UnitPrice { get; set; }
-        public Nullable<short> UnitsInStock { get; set; }
-        public Nullable<short> UnitsOnOrder { get; set; }
-        public Nullable<short> ReorderLevel { get; set; }
-        public bool Discontinued { get; set; }
+        public int Id { get; set; }
+        public Nullable<int> IdType { get; set; }
+        public Nullable<int> IdColor { get; set; }
+        public Nullable<int> IdBrand { get; set; }
+        public Nullable<int> IdProvider { get; set; }
+        public int IdCatalog { get; set; }
+        public string Title { get; set; }
+        public string Nombre { get; set; }
+        public string Description { get; set; }
+        public string Observations { get; set; }
+        public Nullable<decimal> PriceDistributor { get; set; }
+        public decimal PriceClient { get; set; }
+        public decimal PriceMember { get; set; }
+        public bool IsEnabled { get; set; }
+        public string Keywords { get; set; }
+        public System.DateTime DateUpdate { get; set; }
     
-        public virtual Category Category { get; set; }
+        public virtual CatBrand CatBrand { get; set; }
+        public virtual CatCatalog CatCatalog { get; set; }
+        public virtual CatColor CatColor { get; set; }
+        public virtual CatProvider CatProvider { get; set; }
+        public virtual CatTypeProduct CatTypeProduct { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order_Detail> Order_Details { get; set; }
-        public virtual Supplier Supplier { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DetailProduct> DetailProducts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ImagesProduct> ImagesProducts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SimilarProduct> SimilarProducts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SizeForProduct> SizeForProducts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Qualification> Qualifications { get; set; }
     }
 }
