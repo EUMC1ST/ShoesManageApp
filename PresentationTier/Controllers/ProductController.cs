@@ -14,6 +14,18 @@ namespace PresentationTier.Controllers
         Product productBusiness = new Product();
         List<ProductEntity> product = new List<ProductEntity>();
         // GET: Product
+        public ActionResult GetProductsPagination(int pagina)
+        {
+            var products = productBusiness.GetProductsPagination(pagina);
+            return View("product",products);
+        }
+
+
+        public ActionResult GetProducts()
+        {
+            var products = productBusiness.GetProducts();
+            return View("product",products);
+        }
 
         public ActionResult GetProductById(int? id, string name)
         {
@@ -36,11 +48,8 @@ namespace PresentationTier.Controllers
             return View("Product",product);
         }
 
-        public ActionResult GetProducts()
-        {
-            var products = productBusiness.GetProducts();
-            return View(products);
-        }
+
+
 
         public ActionResult Create()
         {

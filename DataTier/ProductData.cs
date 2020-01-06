@@ -11,8 +11,25 @@ namespace DataTier
     public class ProductData
     {
         private DataProductsEntities  _context = new DataProductsEntities ();
+        private List<ProductEntity> products = new List<ProductEntity>();
+
+        public List<ProductEntity> AddProduct()
+        {
+
+            return new List<ProductEntity>();
+        }
+
+
+        public List<ProductEntity> GetProductsPagination(int pagina)
+        {
+            if(pagina != 1)
+               return Assist.Convert<List<eumc1_function_paginador_Result>,List<ProductEntity>>(_context.eumc1_function_paginador(pagina,10).ToList());
+            products = Assist.Convert<List<eumc1_function_paginador_Result>,List<ProductEntity>>(_context.eumc1_function_paginador(1,10).ToList());
+            return products;
+        }
         public List<ProductEntity> GetProducts()
         {
+            var products1 = _context.eumc1_function_paginador(1,10).ToList();
             var products = _context.eumc1_getProducts().ToList();
             return Assist.Convert<List<eumc1_getProducts_Result>, List<ProductEntity>>(products); 
         }

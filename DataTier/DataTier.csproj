@@ -101,6 +101,9 @@
     <Compile Include="DetailProduct.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="eumc1_function_paginador_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="eumc1_getProductByIdOrName_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

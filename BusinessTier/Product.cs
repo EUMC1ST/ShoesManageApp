@@ -12,6 +12,18 @@ namespace BusinessTier
     {
         private ProductData productData = new ProductData();
 
+        public List<ProductEntity> AddProduct()
+        {
+
+            return new List<ProductEntity>();
+        }
+
+        public List<ProductEntity> GetProductsPagination(int pagina)
+        {
+            var products = productData.GetProductsPagination(pagina);
+            return products;
+        }
+
         public List<ProductEntity> GetProducts()
         {
             var products = productData.GetProducts();

@@ -17,7 +17,6 @@ namespace DataTier
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CatCatalog()
         {
-            this.ImagesProducts = new HashSet<ImagesProduct>();
             this.Products = new HashSet<Product>();
         }
     
@@ -30,8 +29,6 @@ namespace DataTier
         public string IsEnabled { get; set; }
     
         public virtual CatProvider CatProvider { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ImagesProduct> ImagesProducts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }
     }

@@ -1,0 +1,7 @@
+﻿@model IEnumerable<EntityTier.ProductEntity>
+
+@for (int i = 0; i <= Model.Count() / 10; i++)
+{
+    var pagina = i + 1;
+    <li class="page-item">@Html.ActionLink(pagina.ToString(), "getProductsPagination", "Product", new { pagina }, new { @class = "page-link" })</li>
+}

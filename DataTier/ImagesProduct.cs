@@ -21,8 +21,6 @@ namespace DataTier
         public string DateUpdate { get; set; }
         public string IsEnabled { get; set; }
     
-        public virtual CatBrand CatBrand { get; set; }
-        public virtual CatCatalog CatCatalog { get; set; }
         public virtual Product Product { get; set; }
     }
 }

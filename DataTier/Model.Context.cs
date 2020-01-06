@@ -44,6 +44,20 @@ namespace DataTier
         public virtual DbSet<SimilarProduct> SimilarProducts { get; set; }
         public virtual DbSet<SizeForProduct> SizeForProducts { get; set; }
     
+        [DbFunction("DataProductsEntities", "eumc1_function_paginador")]
+        public virtual IQueryable<eumc1_function_paginador_Result> eumc1_function_paginador(Nullable<int> pagina, Nullable<int> cantidadRegistros)
+        {
+            var paginaParameter = pagina.HasValue ?
+                new ObjectParameter("pagina", pagina) :
+                new ObjectParameter("pagina", typeof(int));
+    
+            var cantidadRegistrosParameter = cantidadRegistros.HasValue ?
+                new ObjectParameter("cantidadRegistros", cantidadRegistros) :
+                new ObjectParameter("cantidadRegistros", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<eumc1_function_paginador_Result>("[DataProductsEntities].[eumc1_function_paginador](@pagina, @cantidadRegistros)", paginaParameter, cantidadRegistrosParameter);
+        }
+    
         public virtual int ACOB_Delete(Nullable<int> id)
         {
             var idParameter = id.HasValue ?
@@ -240,6 +254,116 @@ namespace DataTier
                 new ObjectParameter("Date", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BRTV_updateM", idParameter, titleParameter, nombreParameter, descriptionParameter, observationsParameter, priceClientParameter, priceMemberParameter, isEnabledParameter, idTypeParameter, idColorParameter, idBrandParameter, idProviderParameter, idCatalogParameter, priceDistributorParameter, keywordsParameter, dateParameter);
+        }
+    
+        public virtual int eumc1_deleteProductById(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("eumc1_deleteProductById", idParameter);
+        }
+    
+        public virtual int eumc1_editProduct(Nullable<int> id, Nullable<int> idType, Nullable<int> idColor, Nullable<int> idBrand, Nullable<int> idProvider, Nullable<int> idCatalog, string nombre, string title, string description, string observations, Nullable<decimal> priceDistributor, Nullable<decimal> priceClient, Nullable<decimal> priceMember, Nullable<bool> isEnabled, string keywords, Nullable<System.DateTime> dateUpdate)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            var idTypeParameter = idType.HasValue ?
+                new ObjectParameter("IdType", idType) :
+                new ObjectParameter("IdType", typeof(int));
+    
+            var idColorParameter = idColor.HasValue ?
+                new ObjectParameter("IdColor", idColor) :
+                new ObjectParameter("IdColor", typeof(int));
+    
+            var idBrandParameter = idBrand.HasValue ?
+                new ObjectParameter("IdBrand", idBrand) :
+                new ObjectParameter("IdBrand", typeof(int));
+    
+            var idProviderParameter = idProvider.HasValue ?
+                new ObjectParameter("IdProvider", idProvider) :
+                new ObjectParameter("IdProvider", typeof(int));
+    
+            var idCatalogParameter = idCatalog.HasValue ?
+                new ObjectParameter("IdCatalog", idCatalog) :
+                new ObjectParameter("IdCatalog", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var titleParameter = title != null ?
+                new ObjectParameter("Title", title) :
+                new ObjectParameter("Title", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            var observationsParameter = observations != null ?
+                new ObjectParameter("Observations", observations) :
+                new ObjectParameter("Observations", typeof(string));
+    
+            var priceDistributorParameter = priceDistributor.HasValue ?
+                new ObjectParameter("PriceDistributor", priceDistributor) :
+                new ObjectParameter("PriceDistributor", typeof(decimal));
+    
+            var priceClientParameter = priceClient.HasValue ?
+                new ObjectParameter("PriceClient", priceClient) :
+                new ObjectParameter("PriceClient", typeof(decimal));
+    
+            var priceMemberParameter = priceMember.HasValue ?
+                new ObjectParameter("PriceMember", priceMember) :
+                new ObjectParameter("PriceMember", typeof(decimal));
+    
+            var isEnabledParameter = isEnabled.HasValue ?
+                new ObjectParameter("IsEnabled", isEnabled) :
+                new ObjectParameter("IsEnabled", typeof(bool));
+    
+            var keywordsParameter = keywords != null ?
+                new ObjectParameter("Keywords", keywords) :
+                new ObjectParameter("Keywords", typeof(string));
+    
+            var dateUpdateParameter = dateUpdate.HasValue ?
+                new ObjectParameter("DateUpdate", dateUpdate) :
+                new ObjectParameter("DateUpdate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("eumc1_editProduct", idParameter, idTypeParameter, idColorParameter, idBrandParameter, idProviderParameter, idCatalogParameter, nombreParameter, titleParameter, descriptionParameter, observationsParameter, priceDistributorParameter, priceClientParameter, priceMemberParameter, isEnabledParameter, keywordsParameter, dateUpdateParameter);
+        }
+    
+        public virtual int eumc1_editProductById(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("eumc1_editProductById", idParameter);
+        }
+    
+        public virtual ObjectResult<eumc1_getProductByIdOrName_Result> eumc1_getProductByIdOrName(Nullable<int> id, string name)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<eumc1_getProductByIdOrName_Result>("eumc1_getProductByIdOrName", idParameter, nameParameter);
+        }
+    
+        public virtual ObjectResult<eumc1_getProductColors_Result> eumc1_getProductColors()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<eumc1_getProductColors_Result>("eumc1_getProductColors");
+        }
+    
+        public virtual ObjectResult<eumc1_getProducts_Result> eumc1_getProducts()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<eumc1_getProducts_Result>("eumc1_getProducts");
         }
     
         public virtual ObjectResult<FASV1_AllColor_Result> FASV1_AllColor()
@@ -688,124 +812,7 @@ namespace DataTier
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Nnmrh_Insert_Produc", idTypeParameter, idColorParameter, idBrandParameter, idProviderParameter, idCatalogParameter, titleParameter, nombreParameter, descriptionParameter, observationsParameter, priceDistributorParameter, priceClientParameter, priceMemberParameter, isEnabledParameter, keywordsParameter, dataUpdateParameter);
         }
-    
-        public virtual ObjectResult<eumc1_getProductByIdOrName_Result> eumc1_getProductByIdOrName(Nullable<int> id, string name)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("id", id) :
-                new ObjectParameter("id", typeof(int));
-    
-            var nameParameter = name != null ?
-                new ObjectParameter("Name", name) :
-                new ObjectParameter("Name", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<eumc1_getProductByIdOrName_Result>("eumc1_getProductByIdOrName", idParameter, nameParameter);
-        }
-    
-        public virtual int eumnc1_deleteProducById(Nullable<int> id)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("eumnc1_deleteProducById", idParameter);
-        }
-    
-        public virtual int eumc1_editProductById(Nullable<int> id)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("eumc1_editProductById", idParameter);
-        }
-    
-        public virtual int eumc1_deleteProductById(Nullable<int> id)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("eumc1_deleteProductById", idParameter);
-        }
-    
-        public virtual int eumc1_editProduct(Nullable<int> id, Nullable<int> idType, Nullable<int> idColor, Nullable<int> idBrand, Nullable<int> idProvider, Nullable<int> idCatalog, string nombre, string title, string description, string observations, Nullable<decimal> priceDistributor, Nullable<decimal> priceClient, Nullable<decimal> priceMember, Nullable<bool> isEnabled, string keywords, Nullable<System.DateTime> dateUpdate)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(int));
-    
-            var idTypeParameter = idType.HasValue ?
-                new ObjectParameter("IdType", idType) :
-                new ObjectParameter("IdType", typeof(int));
-    
-            var idColorParameter = idColor.HasValue ?
-                new ObjectParameter("IdColor", idColor) :
-                new ObjectParameter("IdColor", typeof(int));
-    
-            var idBrandParameter = idBrand.HasValue ?
-                new ObjectParameter("IdBrand", idBrand) :
-                new ObjectParameter("IdBrand", typeof(int));
-    
-            var idProviderParameter = idProvider.HasValue ?
-                new ObjectParameter("IdProvider", idProvider) :
-                new ObjectParameter("IdProvider", typeof(int));
-    
-            var idCatalogParameter = idCatalog.HasValue ?
-                new ObjectParameter("IdCatalog", idCatalog) :
-                new ObjectParameter("IdCatalog", typeof(int));
-    
-            var nombreParameter = nombre != null ?
-                new ObjectParameter("Nombre", nombre) :
-                new ObjectParameter("Nombre", typeof(string));
-    
-            var titleParameter = title != null ?
-                new ObjectParameter("Title", title) :
-                new ObjectParameter("Title", typeof(string));
-    
-            var descriptionParameter = description != null ?
-                new ObjectParameter("Description", description) :
-                new ObjectParameter("Description", typeof(string));
-    
-            var observationsParameter = observations != null ?
-                new ObjectParameter("Observations", observations) :
-                new ObjectParameter("Observations", typeof(string));
-    
-            var priceDistributorParameter = priceDistributor.HasValue ?
-                new ObjectParameter("PriceDistributor", priceDistributor) :
-                new ObjectParameter("PriceDistributor", typeof(decimal));
-    
-            var priceClientParameter = priceClient.HasValue ?
-                new ObjectParameter("PriceClient", priceClient) :
-                new ObjectParameter("PriceClient", typeof(decimal));
-    
-            var priceMemberParameter = priceMember.HasValue ?
-                new ObjectParameter("PriceMember", priceMember) :
-                new ObjectParameter("PriceMember", typeof(decimal));
-    
-            var isEnabledParameter = isEnabled.HasValue ?
-                new ObjectParameter("IsEnabled", isEnabled) :
-                new ObjectParameter("IsEnabled", typeof(bool));
-    
-            var keywordsParameter = keywords != null ?
-                new ObjectParameter("Keywords", keywords) :
-                new ObjectParameter("Keywords", typeof(string));
-    
-            var dateUpdateParameter = dateUpdate.HasValue ?
-                new ObjectParameter("DateUpdate", dateUpdate) :
-                new ObjectParameter("DateUpdate", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("eumc1_editProduct", idParameter, idTypeParameter, idColorParameter, idBrandParameter, idProviderParameter, idCatalogParameter, nombreParameter, titleParameter, descriptionParameter, observationsParameter, priceDistributorParameter, priceClientParameter, priceMemberParameter, isEnabledParameter, keywordsParameter, dateUpdateParameter);
-        }
-    
-        public virtual ObjectResult<eumc1_getProductColors_Result> eumc1_getProductColors()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<eumc1_getProductColors_Result>("eumc1_getProductColors");
-        }
-    
-        public virtual ObjectResult<eumc1_getProducts_Result> eumc1_getProducts()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<eumc1_getProducts_Result>("eumc1_getProducts");
-        }
+
+        public System.Data.Entity.DbSet<EntityTier.ProductEntity> ProductEntities { get; set; }
     }
 }

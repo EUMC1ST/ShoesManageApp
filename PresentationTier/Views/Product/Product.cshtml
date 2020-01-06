@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<EntityTier.ProductEntity>
-
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -55,63 +54,75 @@
         </th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(model => item.Id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdColor)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdBrand)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdProvider)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdCatalog)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Observations)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PriceDistributor)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PriceClient)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PriceMember)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsEnabled)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Keywords)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateUpdate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
+    @{int count = 0;}
+    @foreach (var item in Model)
+    {
+        count++;
+        <tr>
+            <td>
+                @Html.DisplayFor(model => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdColor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdBrand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdProvider)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdCatalog)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Observations)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PriceDistributor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PriceClient)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PriceMember)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsEnabled)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Keywords)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateUpdate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+        if(count == 9)
+        {
+            break;
+        }
+    }
 </table>
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        @Html.Partial("_Pagination",Model)
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+</nav>
