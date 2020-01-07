@@ -18,9 +18,15 @@ namespace BusinessTier
             return new List<ProductEntity>();
         }
 
-        public List<ProductEntity> GetProductsPagination(int pagina)
+
+        public int GetTotalProducts()
         {
-            var products = productData.GetProductsPagination(pagina);
+            return productData.GetTotalProducts();
+        }
+
+        public List<ProductEntity> GetProductsPagination(int pagina,int registrosPorPagina)
+        {
+            var products = productData.GetProductsPagination(pagina,registrosPorPagina);
             return products;
         }
 
@@ -41,7 +47,7 @@ namespace BusinessTier
             return wasEdited;
         }
 
-        public List<CatColors> GetProductColors()
+        public List<EntityTier.CatColor> GetProductColors()
         {
             return productData.GetProductColors();
         }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DataProductsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DataProductsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CatBrands">
           <Key>
             <PropertyRef Name="IdBrand" />
@@ -446,6 +446,10 @@
           <Parameter Name="Keywords" Type="varchar(max)" Mode="In" />
           <Parameter Name="Date" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="eumc1_countProducts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="eumc1_countProducts2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Rows" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="eumc1_deleteProductById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
         </Function>
@@ -496,12 +500,16 @@
             </CollectionType>
           </ReturnType>
         </Function>
+        <Function Name="eumc1_getBrands" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="eumc1_getCatalogs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="eumc1_getProductByIdOrName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
           <Parameter Name="Name" Type="varchar(max)" Mode="In" />
         </Function>
         <Function Name="eumc1_getProductColors" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="eumc1_getProducts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="eumc1_getProductType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="eumc1_getProviders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="FASV1_AllColor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="FASV1_DeleteLogic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
@@ -715,8 +723,7 @@
             <End Role="Qualification" EntitySet="Qualification" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DataProductsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1255,14 +1262,14 @@
             <Parameter Name="cantidadRegistros" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ACOB_Delete">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ACOB_SearchByIdOrName" ReturnType="Collection(DataProductsModel.ACOB_SearchByIdOrName_Result)">
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="name" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="BRTV_Delete">
-            <Parameter Name="ProductId" Mode="In" Type="Int32" />
+          <Parameter Name="ProductId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="BRTV_Insert">
             <Parameter Name="IdType" Mode="In" Type="Int32" />
@@ -1283,10 +1290,10 @@
           </FunctionImport>
           <FunctionImport Name="BRTV_InsertChanges" ReturnType="Collection(DataProductsModel.BRTV_InsertChanges_Result)" />
           <FunctionImport Name="BRTV_SearchID" ReturnType="Collection(DataProductsModel.BRTV_SearchID_Result)">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="BRTV_SearchName" ReturnType="Collection(DataProductsModel.BRTV_SearchName_Result)">
-            <Parameter Name="ProductName" Mode="In" Type="String" />
+          <Parameter Name="ProductName" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="BRTV_Show" ReturnType="Collection(DataProductsModel.BRTV_Show_Result)" />
           <FunctionImport Name="BRTV_UpdateChanges" ReturnType="Collection(DataProductsModel.BRTV_UpdateChanges_Result)" />
@@ -1309,7 +1316,7 @@
             <Parameter Name="Date" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="eumc1_deleteProductById">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="eumc1_editProduct">
             <Parameter Name="Id" Mode="In" Type="Int32" />
@@ -1330,7 +1337,7 @@
             <Parameter Name="DateUpdate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="eumc1_editProductById">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="eumc1_getProductByIdOrName" ReturnType="Collection(DataProductsModel.eumc1_getProductByIdOrName_Result)">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1340,13 +1347,13 @@
           <FunctionImport Name="eumc1_getProducts" ReturnType="Collection(DataProductsModel.eumc1_getProducts_Result)" />
           <FunctionImport Name="FASV1_AllColor" ReturnType="Collection(DataProductsModel.FASV1_AllColor_Result)" />
           <FunctionImport Name="FASV1_DeleteLogic">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="FASV1_FilterById" ReturnType="Collection(DataProductsModel.FASV1_FilterById_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="FASV1_FilterByTitle" ReturnType="Collection(DataProductsModel.FASV1_FilterByTitle_Result)">
-            <Parameter Name="Nombre" Mode="In" Type="String" />
+          <Parameter Name="Nombre" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="FASV1_GetAllProducts" ReturnType="Collection(DataProductsModel.FASV1_GetAllProducts_Result)" />
           <FunctionImport Name="FASV1_GetChangesOnProduct_Desc" ReturnType="Collection(DataProductsModel.FASV1_GetChangesOnProduct_Desc_Result)" />
@@ -1383,13 +1390,13 @@
             <Parameter Name="DataUpdate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="LFGC1_BuscaProductoID" ReturnType="Collection(DataProductsModel.LFGC1_BuscaProductoID_Result)">
-            <Parameter Name="ProductId" Mode="In" Type="Int32" />
+          <Parameter Name="ProductId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="LFGC1_BuscaProductoNombre" ReturnType="Collection(DataProductsModel.LFGC1_BuscaProductoNombre_Result)">
-            <Parameter Name="ProductName" Mode="In" Type="String" />
+          <Parameter Name="ProductName" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="LFGC1_EliminaProductoPorID">
-            <Parameter Name="ProductId" Mode="In" Type="Int32" />
+          <Parameter Name="ProductId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="LFGC1_InsertaNuevoProducto">
             <Parameter Name="IdType" Mode="In" Type="Int32" />
@@ -1411,10 +1418,10 @@
           <FunctionImport Name="LFGC1_MuestraProductos" ReturnType="Collection(DataProductsModel.LFGC1_MuestraProductos_Result)" />
           <FunctionImport Name="MPVI_SEARCH_ALL" ReturnType="Collection(DataProductsModel.MPVI_SEARCH_ALL_Result)" />
           <FunctionImport Name="MPVI_SEARCH_ID" ReturnType="Collection(DataProductsModel.MPVI_SEARCH_ID_Result)">
-            <Parameter Name="productId" Mode="In" Type="Int32" />
+          <Parameter Name="productId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="MPVI_SEARCH_NAME" ReturnType="Collection(DataProductsModel.MPVI_SEARCH_NAME_Result)">
-            <Parameter Name="ProductName" Mode="In" Type="String" />
+          <Parameter Name="ProductName" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Nmrh_Act_Product">
             <Parameter Name="ProductId" Mode="In" Type="Int32" />
@@ -1435,13 +1442,13 @@
             <Parameter Name="DataUpdate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="NMRH_Eliminar">
-            <Parameter Name="products" Mode="In" Type="Int32" />
+          <Parameter Name="products" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="NmrhID" ReturnType="Collection(DataProductsModel.NmrhID_Result)">
-            <Parameter Name="ProductId" Mode="In" Type="Int32" />
+          <Parameter Name="ProductId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="NmrhName" ReturnType="Collection(DataProductsModel.NmrhName_Result)">
-            <Parameter Name="ProductNM" Mode="In" Type="String" />
+          <Parameter Name="ProductNM" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="NmrhProduc" ReturnType="Collection(DataProductsModel.NmrhProduc_Result)" />
           <FunctionImport Name="Nnmrh_Insert_Produc">
@@ -1461,6 +1468,14 @@
             <Parameter Name="Keywords" Mode="In" Type="String" />
             <Parameter Name="DataUpdate" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="eumc1_countProducts" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="eumc1_countProducts2">
+          <Parameter Name="Rows" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="eumc1_getBrands" ReturnType="Collection(DataProductsModel.eumc1_getBrands_Result)" />
+          <FunctionImport Name="eumc1_getCatalogs" ReturnType="Collection(DataProductsModel.eumc1_getCatalogs_Result)" />
+          <FunctionImport Name="eumc1_getProductType" ReturnType="Collection(DataProductsModel.eumc1_getProductType_Result)" />
+          <FunctionImport Name="eumc1_getProviders" ReturnType="Collection(DataProductsModel.eumc1_getProviders_Result)" />
         </EntityContainer>
         <ComplexType Name="ACOB_SearchByIdOrName_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -1843,6 +1858,27 @@
           <Property Type="Boolean" Name="IsEnabled" Nullable="false" />
           <Property Type="String" Name="Keywords" Nullable="false" />
           <Property Type="DateTime" Name="DateUpdate" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="eumc1_getBrands_Result">
+          <Property Type="Int32" Name="IdBrand" Nullable="false" />
+          <Property Type="String" Name="Code" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="eumc1_getCatalogs_Result">
+          <Property Type="Int32" Name="IdCatalog" Nullable="false" />
+          <Property Type="Int32" Name="IdProvider" Nullable="false" />
+          <Property Type="String" Name="Season" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="eumc1_getProductType_Result">
+          <Property Type="Int32" Name="IdType" Nullable="false" />
+          <Property Type="String" Name="Code" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="eumc1_getProviders_Result">
+          <Property Type="Int32" Name="IdProvider" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2549,6 +2585,45 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Nnmrh_Insert_Produc" FunctionName="DataProductsModel.Store.Nnmrh_Insert_Produc" />
+          <FunctionImportMapping FunctionImportName="eumc1_countProducts" FunctionName="DataProductsModel.Store.eumc1_countProducts" />
+          <FunctionImportMapping FunctionImportName="eumc1_countProducts2" FunctionName="DataProductsModel.Store.eumc1_countProducts2" />
+          <FunctionImportMapping FunctionImportName="eumc1_getBrands" FunctionName="DataProductsModel.Store.eumc1_getBrands">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataProductsModel.eumc1_getBrands_Result">
+                <ScalarProperty Name="IdBrand" ColumnName="IdBrand" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="eumc1_getCatalogs" FunctionName="DataProductsModel.Store.eumc1_getCatalogs">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataProductsModel.eumc1_getCatalogs_Result">
+                <ScalarProperty Name="IdCatalog" ColumnName="IdCatalog" />
+                <ScalarProperty Name="IdProvider" ColumnName="IdProvider" />
+                <ScalarProperty Name="Season" ColumnName="Season" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="eumc1_getProductType" FunctionName="DataProductsModel.Store.eumc1_getProductType">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataProductsModel.eumc1_getProductType_Result">
+                <ScalarProperty Name="IdType" ColumnName="IdType" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="eumc1_getProviders" FunctionName="DataProductsModel.Store.eumc1_getProviders">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DataProductsModel.eumc1_getProviders_Result">
+                <ScalarProperty Name="IdProvider" ColumnName="IdProvider" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -1,0 +1,145 @@
+﻿@model PresentationTier.Models.ProductsModel
+<p>
+    @Html.ActionLink("Create New", "Create",null,null, new { @class="btn"})
+</p>
+@using (Html.BeginForm("Index", "Product", FormMethod.Post))
+{
+    <table class="table">
+        <tr>
+            @foreach (var item in Model.Products)
+            {
+                <th>
+                    @Html.DisplayNameFor(model => item.Id)
+                </th>
+                @*<th>
+                    @Html.DisplayNameFor(model => item.IdType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => item.IdColor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => item.IdBrand)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => item.IdProvider)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => item.IdCatalog)
+                </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => item.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => item.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => item.Description)
+                </th>
+                @*<th>
+                    @Html.DisplayNameFor(model => item.Observations)
+                </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => item.PriceDistributor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => item.PriceClient)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => item.PriceMember)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => item.IsEnabled)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => item.Keywords)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => item.DateUpdate)
+                </th>
+                <th></th>
+                break;
+            }
+
+        </tr>
+        @{int count = 0;}
+        @foreach (var item in Model.Products)
+        {
+            count++;
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.IdType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdColor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdBrand)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdProvider)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdCatalog)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.Observations)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.PriceDistributor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PriceClient)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PriceMember)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsEnabled)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Keywords)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateUpdate)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </table>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            @for (int i = 0; i <= Model.PageCount; i++)
+            {
+            var page = i + 1;
+            <li class="page-item"><a href="javascript:PagerClick(@page);">@page</a></li>
+            @*<li class="page-item">@Html.ActionLink(i.ToString(), "Index", "Product", new { Model.CurrentPageIndex }, new { @class = "page-link" })</li>*@
+            }
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+    </nav>
+    <input type="hidden" id="hfCurrentPageIndex" name="currentPageIndex" />
+}
+<script type="text/javascript">
+    function PagerClick(index) {
+        document.getElementById("hfCurrentPageIndex").value = index;
+        document.forms[0].submit();
+    }
+</script>
+

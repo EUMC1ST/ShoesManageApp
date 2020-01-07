@@ -812,7 +812,35 @@ namespace DataTier
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Nnmrh_Insert_Produc", idTypeParameter, idColorParameter, idBrandParameter, idProviderParameter, idCatalogParameter, titleParameter, nombreParameter, descriptionParameter, observationsParameter, priceDistributorParameter, priceClientParameter, priceMemberParameter, isEnabledParameter, keywordsParameter, dataUpdateParameter);
         }
-
-        public System.Data.Entity.DbSet<EntityTier.ProductEntity> ProductEntities { get; set; }
+    
+        public virtual ObjectResult<Nullable<int>> eumc1_countProducts()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("eumc1_countProducts");
+        }
+    
+        public virtual int eumc1_countProducts2(ObjectParameter rows)
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("eumc1_countProducts2", rows);
+        }
+    
+        public virtual ObjectResult<eumc1_getBrands_Result> eumc1_getBrands()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<eumc1_getBrands_Result>("eumc1_getBrands");
+        }
+    
+        public virtual ObjectResult<eumc1_getCatalogs_Result> eumc1_getCatalogs()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<eumc1_getCatalogs_Result>("eumc1_getCatalogs");
+        }
+    
+        public virtual ObjectResult<eumc1_getProductType_Result> eumc1_getProductType()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<eumc1_getProductType_Result>("eumc1_getProductType");
+        }
+    
+        public virtual ObjectResult<eumc1_getProviders_Result> eumc1_getProviders()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<eumc1_getProviders_Result>("eumc1_getProviders");
+        }
     }
 }
